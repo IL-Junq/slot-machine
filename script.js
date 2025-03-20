@@ -10,7 +10,7 @@ class SlotMachine {
         this.toggleButton = document.getElementById('toggle-upload');
         
         // Sound elements
-        this.spinSound = new Audio('sounds/jackpotsoundeffect.mp3');
+        this.spinSound = new Audio('https://github.com/IL-Junq/slot-machine/blob/master/sounds/jackpotsoundeffect.mp3');
         this.spinSound.playbackRate = 1.0; // Normal speed
         this.winSound = document.getElementById('winSound');
         
