@@ -9,6 +9,11 @@ class SlotMachine {
         this.settingsPanel = document.getElementById('settings-panel');
         this.toggleButton = document.getElementById('toggle-upload');
         
+        // Sound elements
+        this.spinSound = new Audio('sounds/jackpotsoundeffect.mp3');
+        this.spinSound.playbackRate = 1.0; // Normal speed
+        this.winSound = document.getElementById('winSound');
+        
         this.isSpinning = false;
         this.symbolHeight = 100;
         this.symbolsPerSlot = 7;
@@ -241,6 +246,24 @@ class SlotMachine {
         this.isSpinning = true;
         this.spinButton.disabled = true;
         this.speedIndex = 0;
+
+        // Calculate total spin duration more accurately
+        const baseSpins = 20;
+        const lastSlotIndex = this.slots.length - 1;
+        const lastSlotSpins = baseSpins + (lastSlotIndex * 5);
+        const spinTime = lastSlotSpins * this.speeds[0]; // Time for spins
+        const delayTime = lastSlotIndex * 500; // Time for delays between slots
+        const stopTime = this.slots.length * 200; // Time for stop animations
+        const totalDuration = spinTime + delayTime + stopTime;
+
+        // Start playing the spin sound
+        if (this.spinSound) {
+            this.spinSound.currentTime = 0;
+            // Calculate and set playback rate
+            const soundDuration = this.spinSound.duration * 1000; // Convert to ms
+            this.spinSound.playbackRate = soundDuration / totalDuration;
+            this.spinSound.play();
+        }
         
         this.slots.forEach((slot, index) => {
             setTimeout(() => {
@@ -306,10 +329,21 @@ class SlotMachine {
         const isWin = results.every(result => result === results[0]);
         
         setTimeout(() => {
+            // Stop the spin sound
+            if (this.spinSound) {
+                this.spinSound.pause();
+                this.spinSound.currentTime = 0;
+            }
+
             this.isSpinning = false;
             this.spinButton.disabled = false;
-            if (isWin) {
-                alert('Congratulations! You won!');
+            
+            if (isWin && this.winSound) {
+                this.winSound.currentTime = 0;
+                this.winSound.play();
+                setTimeout(() => {
+                    alert('Congratulations! You won!');
+                }, 500);
             }
         }, 500);
     }
