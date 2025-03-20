@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slot Machine</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="slot-machine">
+            <div class="slot">
+                <div class="symbols"></div>
+            </div>
+            <div class="slot">
+                <div class="symbols"></div>
+            </div>
+            <div class="slot">
+                <div class="symbols"></div>
+            </div>
+        </div>
+        <div class="controls">
+            <button id="spin-button">SPIN!</button>
+            <button id="toggle-upload" class="toggle-button">Upload Images</button>
+        </div>
+        
+        <div class="settings-panel" id="settings-panel">
+            <div class="upload-section">
+                <h3>Drag & Drop Images</h3>
+                <div class="drop-zone" id="drop-zone">
+                    <div class="drop-zone-content">
+                        <p>Drag and drop images here</p>
+                        <p>or</p>
+                        <input type="file" id="image-upload" multiple accept="image/*">
+                    </div>
+                </div>
+                <div id="image-preview" class="image-preview"></div>
+            </div>
+            <div class="selected-section">
+                <h3>Selected Images for Slot Machine</h3>
+                <div class="selected-images" id="selected-images">
+                    <p class="empty-message">Drag images here to use in slot machine</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
